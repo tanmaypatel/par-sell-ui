@@ -24,4 +24,13 @@ export class TractorsRepository {
 
         return tractors;
     }
+
+    async createTractor(tractor: Tractor): Promise<Tractor> {
+        const createdTractor: Tractor = await this._tractorsService.createTractor(tractor);
+
+        const mergedTractors: List<Tractor> = this._tractors.getValue().push(createdTractor);
+        this._tractors.next(mergedTractors);
+
+        return createdTractor;
+    }
 }

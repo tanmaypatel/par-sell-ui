@@ -13,17 +13,18 @@ import {
     styleUrls: ['./login.page.scss']
 })
 export class LoginPageComponent {
-    loginForm: FormGroup = new FormGroup({
-        userEmail: new FormControl('', [
-            Validators.required,
-            Validators.email
-        ]),
-        userPassword: new FormControl('', [
-            Validators.required
-        ])
-    });
+    loginForm: FormGroup;
 
     constructor(private _router: Router, private _authService: AuthService) {
+        this.loginForm = new FormGroup({
+            userEmail: new FormControl('', [
+                Validators.required,
+                Validators.email
+            ]),
+            userPassword: new FormControl('', [
+                Validators.required
+            ])
+        });
     }
 
     onLoginFormSubmit() {

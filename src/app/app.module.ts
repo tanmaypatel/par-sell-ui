@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,7 @@ import { TractorsPageComponent } from '../tractors/pages/tractors/tractors.page'
 import { TractorsRepository } from '../tractors/repositories/tractors.repository';
 import { AuthenticatedAccessGuard } from '../common/guards/authenticated-access.guard';
 import { UnauthenticatedAccessGuard } from '../common/guards/unauthenticated-access.guard';
+import { CreateTractorComponent } from '../tractors/components/create-tractor/create-tractor.component';
 
 @NgModule({
     declarations: [
@@ -26,13 +27,15 @@ import { UnauthenticatedAccessGuard } from '../common/guards/unauthenticated-acc
         DashboardPageComponent,
         NotFoundPageComponent,
         LoginPageComponent,
-        TractorsPageComponent
+        TractorsPageComponent,
+        CreateTractorComponent
     ],
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+        NgbModalModule
     ],
     providers: [
         Config,
@@ -42,6 +45,9 @@ import { UnauthenticatedAccessGuard } from '../common/guards/unauthenticated-acc
         UnauthenticatedAccessGuard,
         TractorsService,
         TractorsRepository
+    ],
+    entryComponents: [
+        CreateTractorComponent
     ],
     bootstrap: [AppComponent]
 })

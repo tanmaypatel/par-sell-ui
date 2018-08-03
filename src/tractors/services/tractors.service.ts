@@ -33,7 +33,7 @@ export class TractorsService {
         return List(tractors);
     }
 
-    async createTractor(name: string): Promise<Tractor> {
+    async createTractor(tractor: Tractor): Promise<Tractor> {
         const response: any = await axios.request({
             method: 'POST',
             url: `${this._configuration.API_BASE_URL}/tractors`,
@@ -41,7 +41,7 @@ export class TractorsService {
                 Authorization: `Bearer ${this._session.accessToken}`
             },
             data: {
-                name: name
+                name: tractor.name
             }
         });
 
