@@ -23,9 +23,9 @@ export class AuthService {
     ): Promise<IAuthenticationDetails> {
         const response: any = await axios.request({
             method: 'POST',
-            url: `${this._configuration.API_BASE_URL}`,
+            url: `${this._configuration.API_BASE_URL}/auth/login`,
             headers: {
-                Authentication: `Basic ${btoa(email + ':' + password)}`
+                Authorization: `Basic ${btoa(email + ':' + password)}`
             }
         });
 

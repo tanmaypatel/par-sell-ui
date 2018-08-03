@@ -7,22 +7,25 @@
                     <h6 class="card-subtitle mb-2 text-muted">Use your email and password to login</h6>
                     <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
                         <div class="form-group">
-                            <label for="inputEmail">Email address</label>
-                            <input formControlName="email" name="email" type="email" class="form-control" id="inputEmail" placeholder="Enter email">
-                            <div *ngIf="email.invalid && (email.dirty || email.touched)">
-                                <div *ngIf="email.errors.required" class="invalid-feedback">
+                            <label for="userEmail">Email address</label>
+                            <input formControlName="userEmail" name="userEmail" type="email" [ngClass]="{'form-control': true, 'is-invalid': loginForm.controls.userEmail.invalid && (loginForm.controls.userEmail.dirty || loginForm.controls.userEmail.touched)}" id="userEmail" placeholder="Enter email" required>
+                            <ul *ngIf="loginForm.controls.userEmail.invalid && (loginForm.controls.userEmail.dirty || loginForm.controls.userEmail.touched)" class="invalid-feedback list-unstyled">
+                                <li *ngIf="loginForm.controls.userEmail.errors.required">
                                     Please Enter Your Email Address
-                                </div>
-                            </div>
+                                </li>
+                                <li *ngIf="loginForm.controls.userEmail.errors.email">
+                                    Please Enter Valid Email Address
+                                </li>
+                            </ul>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword">Password</label>
-                            <input formControlName="password" name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
-                            <div *ngIf="password.invalid && (password.dirty || password.touched)">
-                                <div *ngIf="password.errors.required" class="invalid-feedback">
+                            <label for="userPassword">Password</label>
+                            <input formControlName="userPassword" name="userPassword" type="password" [ngClass]="{'form-control': true, 'is-invalid': loginForm.controls.userPassword.invalid && (loginForm.controls.userPassword.dirty || loginForm.controls.userPassword.touched)}" id="userPassword" placeholder="Password" required>
+                            <ul *ngIf="loginForm.controls.userPassword.invalid && (loginForm.controls.userPassword.dirty || loginForm.controls.userPassword.touched)" class="invalid-feedback list-unstyled">
+                                <li *ngIf="loginForm.controls.userPassword.errors.required">
                                     Please Enter Your Password
-                                </div>
-                            </div>
+                                </li>
+                            </ul>
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
                     </form>

@@ -12,7 +12,7 @@ export enum Environment {
 @Injectable()
 export class Config {
     get ENVIRONMENT(): Environment {
-        return Environment.DEVELOPMENT;
+        return Environment.STAGING;
     }
 
     get ENVIRONMENT_NAME(): string {
