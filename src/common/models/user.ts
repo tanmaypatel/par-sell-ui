@@ -31,6 +31,10 @@ export class User extends UserRecord implements IUser {
     createdAt: Moment;
     updatedAt: Moment;
 
+    get displayName(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
+
     constructor(props: IUser) {
         super(props);
     }
