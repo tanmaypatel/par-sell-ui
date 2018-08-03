@@ -9,9 +9,15 @@ import { NavbarComponent } from '../common/components/navbar/navbar.component';
 import { DashboardPageComponent } from '../dashboard/pages/dashboard/dashboard.page';
 import { NotFoundPageComponent } from '../common/pages/not-found/not-found.page';
 import { LoginPageComponent } from '../common/pages/login/login.page';
-import { AuthService } from '../common/services/authentication.service';
+
 import { Config } from '../config/configuration.provider';
 import { SessionRepository } from '../common/repositories/session.respository';
+import { TractorsService } from '../tractors/services/tractors.service';
+import { AuthService } from '../common/services/authentication.service';
+import { TractorsPageComponent } from '../tractors/pages/tractors/tractors.page';
+import { TractorsRepository } from '../tractors/repositories/tractors.repository';
+import { AuthenticatedAccessGuard } from '../common/guards/authenticated-access.guard';
+import { UnauthenticatedAccessGuard } from '../common/guards/unauthenticated-access.guard';
 
 @NgModule({
     declarations: [
@@ -19,7 +25,8 @@ import { SessionRepository } from '../common/repositories/session.respository';
         NavbarComponent,
         DashboardPageComponent,
         NotFoundPageComponent,
-        LoginPageComponent
+        LoginPageComponent,
+        TractorsPageComponent
     ],
     imports: [
         BrowserModule,
@@ -27,7 +34,15 @@ import { SessionRepository } from '../common/repositories/session.respository';
         AppRoutingModule,
         NgbModule.forRoot()
     ],
-    providers: [Config, AuthService, SessionRepository],
+    providers: [
+        Config,
+        SessionRepository,
+        AuthService,
+        AuthenticatedAccessGuard,
+        UnauthenticatedAccessGuard,
+        TractorsService,
+        TractorsRepository
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import {
     AuthService,
     IAuthenticationDetails
 } from '../../services/authentication.service';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login-page',
