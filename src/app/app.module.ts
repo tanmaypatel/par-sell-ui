@@ -19,6 +19,10 @@ import { TractorsRepository } from '../tractors/repositories/tractors.repository
 import { AuthenticatedAccessGuard } from '../common/guards/authenticated-access.guard';
 import { UnauthenticatedAccessGuard } from '../common/guards/unauthenticated-access.guard';
 import { CreateTractorComponent } from '../tractors/components/create-tractor/create-tractor.component';
+import { ParcelsPageComponent } from '../parcels/pages/parcels/parcels.page';
+import { ParcelsService } from '../parcels/services/parcels.service';
+import { ParcelsRepository } from '../parcels/repositories/parcels.repository';
+import { CreateParcelComponent } from '../parcels/components/create-parcel/create-parcel.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +32,9 @@ import { CreateTractorComponent } from '../tractors/components/create-tractor/cr
         NotFoundPageComponent,
         LoginPageComponent,
         TractorsPageComponent,
-        CreateTractorComponent
+        ParcelsPageComponent,
+        CreateTractorComponent,
+        CreateParcelComponent
     ],
     imports: [
         BrowserModule,
@@ -44,10 +50,13 @@ import { CreateTractorComponent } from '../tractors/components/create-tractor/cr
         AuthenticatedAccessGuard,
         UnauthenticatedAccessGuard,
         TractorsService,
-        TractorsRepository
+        TractorsRepository,
+        ParcelsService,
+        ParcelsRepository
     ],
     entryComponents: [
-        CreateTractorComponent
+        CreateTractorComponent,
+        CreateParcelComponent
     ],
     bootstrap: [AppComponent]
 })
