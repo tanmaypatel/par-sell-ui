@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +26,14 @@ import { ParcelsPageComponent } from '../parcels/pages/parcels/parcels.page';
 import { ParcelsService } from '../parcels/services/parcels.service';
 import { ParcelsRepository } from '../parcels/repositories/parcels.repository';
 import { CreateParcelComponent } from '../parcels/components/create-parcel/create-parcel.component';
+import { ParcelProcessingsPageComponent } from '../parcels/pages/parcel-processings/parcel-processings.page';
+import { ParcelProcessingsService } from '../parcels/services/parcel-processings.service';
+import { ParcelProcessingsRepository } from '../parcels/repositories/parcel-processings.repository';
+import { ProcessParcelComponent } from '../parcels/components/process-parcel/process-parcel.component';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+library.add(faCalendar);
 
 @NgModule({
     declarations: [
@@ -33,15 +44,20 @@ import { CreateParcelComponent } from '../parcels/components/create-parcel/creat
         LoginPageComponent,
         TractorsPageComponent,
         ParcelsPageComponent,
+        ParcelProcessingsPageComponent,
         CreateTractorComponent,
-        CreateParcelComponent
+        CreateParcelComponent,
+        ProcessParcelComponent
     ],
     imports: [
         BrowserModule,
         ReactiveFormsModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         NgbModule.forRoot(),
-        NgbModalModule
+        NgbModalModule,
+        FontAwesomeModule,
+        SimpleNotificationsModule.forRoot()
     ],
     providers: [
         Config,
@@ -52,11 +68,14 @@ import { CreateParcelComponent } from '../parcels/components/create-parcel/creat
         TractorsService,
         TractorsRepository,
         ParcelsService,
-        ParcelsRepository
+        ParcelsRepository,
+        ParcelProcessingsService,
+        ParcelProcessingsRepository
     ],
     entryComponents: [
         CreateTractorComponent,
-        CreateParcelComponent
+        CreateParcelComponent,
+        ProcessParcelComponent
     ],
     bootstrap: [AppComponent]
 })

@@ -45,12 +45,12 @@
 
 <ng-template #processParcelModalContent let-onClose="close" let-onDismiss="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title">Process Parcel</h4>
+        <h4 class="modal-title">Process {{selectedParcelForProcessing.name}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="onDismiss(null)">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <h2>Ability to process Parcel {{selectedParcelForProcessing.name}} coming soon!</h2>
+        <app-process-parcel [parcelForProcessing]="selectedParcelForProcessing"></app-process-parcel>
       </div>
 </ng-template>

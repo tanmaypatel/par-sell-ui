@@ -23,14 +23,11 @@
                 </li>
             </ul>
 
-            <label for="culture">Area</label>
+            <label for="area">Area</label>
             <input formControlName="area" name="area" type="number" [ngClass]="{'form-control': true, 'is-invalid': createParcelForm.controls.area.invalid && (createParcelForm.controls.area.dirty || createParcelForm.controls.area.touched)}" id="area" placeholder="Enter Area in Square Feet" required>
             <ul *ngIf="createParcelForm.controls.area.invalid && (createParcelForm.controls.area.dirty || createParcelForm.controls.area.touched)" class="invalid-feedback list-unstyled">
                 <li *ngIf="createParcelForm.controls.area.errors.required">
                     Please Enter Area for the Parcel in Square Feet
-                </li>
-                <li *ngIf="createParcelForm.controls.culture.errors.minLength">
-                    Atlest 3 charactes are required for Culture
                 </li>
             </ul>
         </div>

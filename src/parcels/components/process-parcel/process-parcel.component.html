@@ -1,0 +1,48 @@
+<div class="create-parcel-component">
+    <p *ngIf="!(tractorsRepository.tractors | async)?.size" >Loading Tractors</p>
+    <form *ngIf="(tractorsRepository.tractors | async)?.size" [formGroup]="processParcelForm" (ngSubmit)="onProcessParcelFormSubmit()">
+        <div class="form-group">
+            <label for="tractor">Tractor</label>
+            <select formControlName="tractor" name="tractor" [ngClass]="{'form-control': true, 'is-invalid': processParcelForm.controls.tractor.invalid && (processParcelForm.controls.tractor.dirty || processParcelForm.controls.tractor.touched)}"
+            id="tractor" placeholder="Enter Tractor" required>
+                <option value="">Select Tractor</option>
+                <option *ngFor="let currentTractor of (tractorsRepository.tractors | async)" value="{{currentTractor.tractorId}}">{{currentTractor.name}}</option>
+            </select>
+            <ul *ngIf="processParcelForm.controls.tractor.invalid && (processParcelForm.controls.tractor.dirty || processParcelForm.controls.tractor.touched)"
+                class="invalid-feedback list-unstyled">
+                <li *ngIf="processParcelForm.controls.tractor.errors.required">
+                    Please Enter Tractor for the Parcel
+                </li>
+            </ul>
+
+            <label for="processingDate">Processing Date</label>
+            <div class="input-group">
+                <input formControlName="processingDate" name="processingDate" type="text" ngbDatepicker ngbDatepicker #d="ngbDatepicker"
+                    [ngClass]="{'form-control': true, 'is-invalid': processParcelForm.controls.processingDate.invalid && (processParcelForm.controls.processingDate.dirty || processParcelForm.controls.processingDate.touched)}"
+                    id="processingDate" placeholder="Enter Date" required>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                        <fa-icon [icon]="['fas', 'calendar']"></fa-icon>
+                    </button>
+                </div>
+            </div>
+            <ul *ngIf="processParcelForm.controls.processingDate.invalid && (processParcelForm.controls.processingDate.dirty || processParcelForm.controls.processingDate.touched)"
+                class="invalid-feedback list-unstyled">
+                <li *ngIf="processParcelForm.controls.processingDate.errors.required">
+                    Please Enter Date of Processing
+                </li>
+            </ul>
+
+            <label for="occupiedArea">Area</label>
+            <input formControlName="occupiedArea" name="occupiedArea" type="number" [ngClass]="{'form-control': true, 'is-invalid': processParcelForm.controls.occupiedArea.invalid && (processParcelForm.controls.occupiedArea.dirty || processParcelForm.controls.occupiedArea.touched)}"
+                id="occupiedArea" placeholder="Enter Area in Square Feet" required>
+            <ul *ngIf="processParcelForm.controls.occupiedArea.invalid && (processParcelForm.controls.occupiedArea.dirty || processParcelForm.controls.occupiedArea.touched)"
+                class="invalid-feedback list-unstyled">
+                <li *ngIf="processParcelForm.controls.occupiedArea.errors.required">
+                    Please Enter Area to be occupied by the Parcel in Square Feet
+                </li>
+            </ul>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Parcel</button>
+    </form>
+</div>

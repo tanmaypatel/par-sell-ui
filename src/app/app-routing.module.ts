@@ -8,6 +8,7 @@ import { TractorsPageComponent } from '../tractors/pages/tractors/tractors.page'
 import { AuthenticatedAccessGuard } from '../common/guards/authenticated-access.guard';
 import { UnauthenticatedAccessGuard } from '../common/guards/unauthenticated-access.guard';
 import { ParcelsPageComponent } from '../parcels/pages/parcels/parcels.page';
+import { ParcelProcessingsPageComponent } from '../parcels/pages/parcel-processings/parcel-processings.page';
 
 const routes: Routes = [
     {
@@ -34,6 +35,11 @@ const routes: Routes = [
     {
         path: 'parcels',
         component: ParcelsPageComponent,
+        canActivate: [ AuthenticatedAccessGuard ]
+    },
+    {
+        path: 'parcels/processed',
+        component: ParcelProcessingsPageComponent,
         canActivate: [ AuthenticatedAccessGuard ]
     },
     {

@@ -1,0 +1,26 @@
+<h1>
+  <span>Report for Parcel Processing</span>
+</h1>
+
+<table *ngIf="(processingsRepo.processedParcels | async)?.size" class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Parcel Name</th>
+      <th scope="col">Tractor Name</th>
+      <th scope="col">Parcel Area<br/><em>(in Sq. Feet)</em></th>
+      <th scope="col">Occupied Area<br/><em>(in Sq. Feet)</em></th>
+      <th scope="col">Processed On</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let currentParcelProcessing of (processingsRepo.processedParcels | async); let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{currentParcelProcessing.parcel.name}}</td>
+      <td>{{currentParcelProcessing.tractor.name}}</td>
+      <td>{{currentParcelProcessing.parcel.areaInSquareFeet}}</td>
+      <td>{{currentParcelProcessing.occupiedAreaInSquareFeet}}</td>
+      <td>{{currentParcelProcessing.updatedAt.format('lll')}}</td>
+    </tr>
+  </tbody>
+</table>

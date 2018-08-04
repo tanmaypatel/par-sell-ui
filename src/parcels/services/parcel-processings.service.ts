@@ -5,18 +5,18 @@ import { map } from 'lodash';
 
 import { Config } from '../../config/configuration.provider';
 import { SessionRepository } from '../../common/repositories/session.respository';
-import { Parcel } from '../models/parcel';
-import { ParcelAdapter } from './adapters/parcel.adapter';
+import { ParcelProcessing } from '../models/parcel-processing';
+import { ParcelProcessingAdapter } from './adapters/parcel-processing.adapter';
 
 @Injectable()
-export class ParcelsService {
+export class ParcelProcessingsService {
     constructor(private _configuration: Config, private _session: SessionRepository) {}
 
-    async retrieveParcels(pageStart: number = 0, pageSize: number = 1000): Promise<List<Parcel>> {
+    async retrieveParcelProcessings(pageStart: number = 0, pageSize: number = 1000): Promise<List<ParcelProcessing>> {
         try {
             const response: any = await axios.request({
                 method: 'GET',
-                url: `${this._configuration.API_BASE_URL}/parcels`,
+                url: `${this._configuration.API_BASE_URL}/parcels/processed`,
                 headers: {
                     Authorization: `Bearer ${this._session.accessToken}`
                 }
@@ -24,11 +24,11 @@ export class ParcelsService {
 
             const responseData: any = response.data;
 
-            const parcels: Parcel[] = map(responseData, (datum: any) => {
-                return ParcelAdapter.parseAPIResponse(datum);
+            const parcelProcessings: ParcelProcessing[] = map(responseData, (datum: any) => {
+                return ParcelProcessingAdapter.parseAPIResponse(datum);
             });
 
-            return List(parcels);
+            return List(parcelProcessings);
         } catch (error) {
             if (error.response) {
                 throw new Error(error.response.data.message);
@@ -38,26 +38,27 @@ export class ParcelsService {
         }
     }
 
-    async createParcel(parcel: Parcel): Promise<Parcel> {
+    async processParcel(parcelProcessing: ParcelProcessing): Promise<ParcelProcessing> {
         try {
             const response: any = await axios.request({
                 method: 'POST',
-                url: `${this._configuration.API_BASE_URL}/parcels`,
+                url: `${this._configuration.API_BASE_URL}/parcels/process`,
                 headers: {
                     Authorization: `Bearer ${this._session.accessToken}`
                 },
                 data: {
-                    name: parcel.name,
-                    culture: parcel.culture,
-                    areaInSquareFeet: parcel.areaInSquareFeet
+                    parcelId: parcelProcessing.parcelId,
+                    tractorId: parcelProcessing.tractorId,
+                    date: parcelProcessing.date.format('YYYY-MM-DD'),
+                    occupiedAreaInSquareFeet: parcelProcessing.occupiedAreaInSquareFeet
                 }
             });
 
             const responseData: any = response.data;
 
-            const createdParcel: Parcel = ParcelAdapter.parseAPIResponse(responseData);
+            const processingParcel: ParcelProcessing = ParcelProcessingAdapter.parseAPIResponse(responseData);
 
-            return createdParcel;
+            return processingParcel;
         } catch (error) {
             if (error.response) {
                 throw new Error(error.response.data.message);
