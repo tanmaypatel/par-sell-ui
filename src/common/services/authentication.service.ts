@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { default as axios } from 'axios';
 
 import { Config } from '../../config/configuration.provider';
-import { SessionRepository } from '../../common/repositories/session.respository';
+import { SessionRepository } from '../repositories/session.respository';
 import { User } from '../models/user';
 
 export interface IAuthenticationDetails {
@@ -14,7 +14,7 @@ export interface IAuthenticationDetails {
 export class AuthService {
     constructor(
         private _configuration: Config,
-        private _sessionRepo: SessionRepository
+        private _session: SessionRepository
     ) {}
 
     async authenticate(
@@ -29,12 +29,14 @@ export class AuthService {
             }
         });
 
+        const responseData: any = response.data;
+
         const authenticationDetails: IAuthenticationDetails = {
-            accessToken: response.accessToken,
-            profile: new User(response.profile)
+            accessToken: responseData.accessToken,
+            profile: new User(responseData.profile)
         };
 
-        this._sessionRepo.activateSession(
+        this._session.activateSession(
             authenticationDetails.accessToken,
             authenticationDetails.profile
         );

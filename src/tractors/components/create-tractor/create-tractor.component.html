@@ -1,0 +1,17 @@
+<div class="create-tractor-component">
+    <form [formGroup]="createTractorForm" (ngSubmit)="onCreateTractorFormSubmit()">
+        <div class="form-group">
+            <label for="tractorName">TractorName</label>
+            <input formControlName="tractorName" name="tractorName" type="text" [ngClass]="{'form-control': true, 'is-invalid': createTractorForm.controls.tractorName.invalid && (createTractorForm.controls.tractorName.dirty || createTractorForm.controls.tractorName.touched)}" id="tractorName" placeholder="Enter Tractor Name" required>
+            <ul *ngIf="createTractorForm.controls.tractorName.invalid && (createTractorForm.controls.tractorName.dirty || createTractorForm.controls.tractorName.touched)" class="invalid-feedback list-unstyled">
+                <li *ngIf="createTractorForm.controls.tractorName.errors.required">
+                    Please Enter Name of the Tractor
+                </li>
+                <li *ngIf="createTractorForm.controls.tractorName.errors.minLength">
+                    Atlest 3 charactes are required for Tractor Name
+                </li>
+            </ul>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import {
     AuthService,
     IAuthenticationDetails
 } from '../../services/authentication.service';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login-page',
@@ -13,17 +13,18 @@ import { Router } from '@angular/router';
     styleUrls: ['./login.page.scss']
 })
 export class LoginPageComponent {
-    loginForm: FormGroup = new FormGroup({
-        userEmail: new FormControl('', [
-            Validators.required,
-            Validators.email
-        ]),
-        userPassword: new FormControl('', [
-            Validators.required
-        ])
-    });
+    loginForm: FormGroup;
 
     constructor(private _router: Router, private _authService: AuthService) {
+        this.loginForm = new FormGroup({
+            userEmail: new FormControl('', [
+                Validators.required,
+                Validators.email
+            ]),
+            userPassword: new FormControl('', [
+                Validators.required
+            ])
+        });
     }
 
     onLoginFormSubmit() {
