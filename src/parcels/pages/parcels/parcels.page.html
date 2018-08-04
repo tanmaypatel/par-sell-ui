@@ -1,0 +1,32 @@
+<h1>
+  <span>Parcels</span> <button class="btn btn-primary float-right" (click)="openCreateParcelModal()">Create New Parcel</button>
+</h1>
+
+<table *ngIf="(parcelsRepo.parcels | async)?.size" class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Updated On</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let currentParcel of (parcelsRepo.parcels | async); let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{currentParcel.name}}</td>
+      <td>{{currentParcel.updatedAt.format('lll')}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #createParcelModalContent let-onClose="close" let-onDismiss="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Create Parcel</h4>
+        <button type="button" class="close" aria-label="Close" (click)="onDismiss(null)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-create-parcel (parcelCreated)="onClose(parcel)"></app-create-parcel>
+      </div>
+</ng-template>

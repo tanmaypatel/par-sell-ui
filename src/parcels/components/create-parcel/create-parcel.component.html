@@ -1,0 +1,39 @@
+<div class="create-parcel-component">
+    <form [formGroup]="createParcelForm" (ngSubmit)="onCreateParcelFormSubmit()">
+        <div class="form-group">
+            <label for="parcelName">Parcel Name</label>
+            <input formControlName="parcelName" name="parcelName" type="text" [ngClass]="{'form-control': true, 'is-invalid': createParcelForm.controls.parcelName.invalid && (createParcelForm.controls.parcelName.dirty || createParcelForm.controls.parcelName.touched)}" id="parcelName" placeholder="Enter Parcel Name" required>
+            <ul *ngIf="createParcelForm.controls.parcelName.invalid && (createParcelForm.controls.parcelName.dirty || createParcelForm.controls.parcelName.touched)" class="invalid-feedback list-unstyled">
+                <li *ngIf="createParcelForm.controls.parcelName.errors.required">
+                    Please Enter Name of the Parcel
+                </li>
+                <li *ngIf="createParcelForm.controls.parcelName.errors.minLength">
+                    Atlest 3 charactes are required for Parcel Name
+                </li>
+            </ul>
+
+            <label for="culture">Culture</label>
+            <input formControlName="culture" name="culture" type="text" [ngClass]="{'form-control': true, 'is-invalid': createParcelForm.controls.culture.invalid && (createParcelForm.controls.culture.dirty || createParcelForm.controls.culture.touched)}" id="culture" placeholder="Enter Culture" required>
+            <ul *ngIf="createParcelForm.controls.culture.invalid && (createParcelForm.controls.culture.dirty || createParcelForm.controls.culture.touched)" class="invalid-feedback list-unstyled">
+                <li *ngIf="createParcelForm.controls.culture.errors.required">
+                    Please Enter Culture for the Parcel
+                </li>
+                <li *ngIf="createParcelForm.controls.culture.errors.minLength">
+                    Atlest 3 charactes are required for Culture
+                </li>
+            </ul>
+
+            <label for="culture">Area</label>
+            <input formControlName="area" name="area" type="number" [ngClass]="{'form-control': true, 'is-invalid': createParcelForm.controls.area.invalid && (createParcelForm.controls.area.dirty || createParcelForm.controls.area.touched)}" id="area" placeholder="Enter Area in Square Feet" required>
+            <ul *ngIf="createParcelForm.controls.area.invalid && (createParcelForm.controls.area.dirty || createParcelForm.controls.area.touched)" class="invalid-feedback list-unstyled">
+                <li *ngIf="createParcelForm.controls.area.errors.required">
+                    Please Enter Area for the Parcel in Square Feet
+                </li>
+                <li *ngIf="createParcelForm.controls.culture.errors.minLength">
+                    Atlest 3 charactes are required for Culture
+                </li>
+            </ul>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Parcel</button>
+    </form>
+</div>

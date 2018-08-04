@@ -7,6 +7,7 @@ import { DashboardPageComponent } from '../dashboard/pages/dashboard/dashboard.p
 import { TractorsPageComponent } from '../tractors/pages/tractors/tractors.page';
 import { AuthenticatedAccessGuard } from '../common/guards/authenticated-access.guard';
 import { UnauthenticatedAccessGuard } from '../common/guards/unauthenticated-access.guard';
+import { ParcelsPageComponent } from '../parcels/pages/parcels/parcels.page';
 
 const routes: Routes = [
     {
@@ -28,6 +29,11 @@ const routes: Routes = [
     {
         path: 'tractors',
         component: TractorsPageComponent,
+        canActivate: [ AuthenticatedAccessGuard ]
+    },
+    {
+        path: 'parcels',
+        component: ParcelsPageComponent,
         canActivate: [ AuthenticatedAccessGuard ]
     },
     {
